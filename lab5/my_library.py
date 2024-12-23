@@ -8,12 +8,13 @@ def task5_1(s):
     :param s: строка символов
     :return: часть этой строки, предшествующую первой запятой
     '''
-    zap = s.find(',')
-    if zap == -1:
-        print('Запятой нет')
-    else:
-        s2 = s[0:zap]
-        return s2
+    zap = s.find(',')  # Ищем индекс первой запятой 
+    if zap == -1:  # Проверяем, была ли найдена запятая
+        print('Запятой нет') 
+    else:  
+        s2 = s[0:zap]  # Извлекаем подстроку из строки s от начала до индекса 
+        return s2  
+
 
 
 def task5_2(text):
@@ -25,20 +26,21 @@ def task5_2(text):
     :param text:
     :return: None
     '''
-    words = text.split()
+    words = text.split()  # Разделяем текст на слова'
 
-    last_word = words[-1] if words else ""
+    last_word = words[-1] if words else ""  # Получаем последнее слово из списка words, если список не пустой, иначе присваиваем пустую строку
+    
+    matching_words = []  # список для хранения совпадающих слов
+    
+    for word in words:  # Проходим по каждому слову в списке words
+        if word == last_word:  # Если текущее слово совпадает с последним словом
+            matching_words.append(word)  # Добавляем его в список 
+    
+    if len(matching_words) > 1:  # Проверяем, есть ли более одного совпадающего слова
+        print("Совпадающие слова:", ' '.join(matching_words[:-1])) 
+    else:  
+        print("Совпадающих слов нет.")  
 
-    matching_words = []
-
-    for word in words:
-        if word == last_word:
-            matching_words.append(word)
-
-    if len(matching_words) > 1:
-        print("Совпадающие слова:", ' '.join(matching_words[:-1]))
-    else:
-        print("Совпадающих слов нет.")
 
 
 def task5_3(s):
@@ -49,15 +51,18 @@ def task5_3(s):
     :param s: вводимая строка
     :return result:инвертированные слова
     '''
-    s = s.split()
-    s2 = []
-    for i in s:
-        if len(i) % 2 != 0:
-            if i[0] in 'аеёиоуыэюяАЕЁИОУЫЭЮЯ':
-                i = i[::-1]
-                s2.append(i)
-    result = ' '.join(s2)
-    return result
+    s = s.split()  # Разделяем строку на слова
+    s2 = []  
+    
+    for i in s:  # Проходим по каждому слову
+        if len(i) % 2 != 0:  # Проверяем, является ли длина слова нечетной
+            if i[0] in 'аеёиоуыэюяАЕЁИОУЫЭЮЯ':  # Проверяем, начинается ли слово с гласной буквы
+                i = i[::-1]  # разворачиваем слово 
+                s2.append(i)  # Добавляем в список s2
+    
+    result = ' '.join(s2)  # Объединяем слова в одну строку, разделяя их пробелами
+    return result 
+
 
 
 def task5_4(text):
@@ -73,23 +78,24 @@ def task5_4(text):
     encrypted_text = ""
 
     length = len(text)
-
-    i = 0
+    
+    i = 0  
+    while i < length:  
+        encrypted_text += text[i]  # Добавляем символ текста с индексом i к зашифрованному тексту
+        i += 3  # Увеличиваем i на 3 для перехода к следующему символу через 3 позиции
+    
+    i = 1  # Устанавливаем i на 1 для второго прохода
+    while i < length:  
+        encrypted_text += text[i]  # Добавляем символ текста с индексом i к зашифрованному тексту
+        i += 3  # Увеличиваем i на 3 для перехода к следующему символу через 3 позиции
+    
+    i = 2  # Устанавливаем i на 2 для третьего прохода
     while i < length:
-        encrypted_text += text[i]
-        i += 3
+        encrypted_text += text[i]  # Добавляем символ текста с индексом i к зашифрованному тексту
+        i += 3  # Увеличиваем i на 3 для перехода к следующему символу через 3 позиции
+    
+    return encrypted_text  
 
-    i = 1
-    while i < length:
-        encrypted_text += text[i]
-        i += 3
-
-    i = 2
-    while i < length:
-        encrypted_text += text[i]
-        i += 3
-
-    return encrypted_text
 
 
 
